@@ -1,0 +1,8 @@
+Dudas
+copiar tailwind.config.ts identico del codigo original?
+layout.tsx en carpeta app, ponerla identica al codigo original?
+
+Resueltas
+pasar las url de importaciones de @ para /../.. ?
+
+
