@@ -1,8 +1,17 @@
-Dudas
-copiar tailwind.config.ts identico del codigo original?
+Dudas ------------------------------
+
+tailwind.config.ts hacerlo igual al codigo original?
+
 layout.tsx en carpeta app, ponerla identica al codigo original?
 
-Resueltas
+Quitar el corchete de cierre en index.tsx/Sidebar, en el div className={`cursor-pointer flex items-center ${
+          isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+        }}
+el corchete se ve de color naranja como las letras de template strings
+
+
+Resueltas -----------------------------
+
 pasar las url de importaciones de @ para /../.. ?
 
 
