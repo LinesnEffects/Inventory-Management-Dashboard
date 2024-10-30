@@ -1,0 +1,32 @@
+Dudas ------------------------------
+
+  Client
+
+    tailwind.config.ts hacerlo igual al codigo original?
+
+    layout.tsx en carpeta app, ponerla identica al codigo original?
+
+    index.tsx/Sidebar, Quitar el corchete de cierre en el div: className={`cursor-pointer flex items-center ${
+              isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+            }}
+    el corchete se ve de color naranja como las letras de template strings
+
+
+  Server
+
+
+
+
+Resueltas -----------------------------
+
+  Client
+
+    pasar las url de importaciones de @ para /../.. ?
+
+  Server
+
+    .env, DATABASE_URL usar contraseña despues de postgresql: contraseña del archivo guardado o usar "root"
+
+
+
+
