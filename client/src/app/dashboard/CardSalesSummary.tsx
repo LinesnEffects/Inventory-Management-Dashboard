@@ -38,13 +38,13 @@ const CardSalesSummary = () => {
     : "N/A";
 
   if (isError) {
-    return <div>Failed to fetch data</div>;
+    return <div className="m-5">Failed to fetch data</div>;
   }
 
   return (
     <div className="row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl flex flex-col justify-between">
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="m-5">Loading...</div>
       ) : (
         <>
           {/* Header */}
@@ -67,6 +67,10 @@ const CardSalesSummary = () => {
                     maximumFractionDigits: 2,
                   })}
                   m
+                </span>
+                <span className="text-green-500 text-sm ml-2">
+                  <TrendingUp className="inline w-4 h-4 mr-1" />
+                  {averageChangePercentage.toFixed(2)}%
                 </span>
               </div>
               <select
@@ -105,7 +109,7 @@ const CardSalesSummary = () => {
                 />
                 <Tooltip
                   formatter={(value: number) => [
-                    `$${value.toLocaleString("en-US")}`,
+                    `$${value.toLocaleString("en")}`,
                   ]}
                   labelFormatter={(label) => {
                     const date = new Date(label);
@@ -130,7 +134,7 @@ const CardSalesSummary = () => {
           <div>
             <hr />
             <div className="flex justify-between items-center mt-6 text-sm px-7 mb-4">
-              <p>{salesData.length || 0}</p>
+              <p>{salesData.length || 0} days</p>
               <p className="text-sm">
                 Highest Sales Date:{" "}
                 <span className="font-bold">{highestValueDate}</span>
