@@ -1,10 +1,38 @@
-import { useGetDashboardMetricsQuery } from "@/state/api";
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import {
+  ExpenseByCategorySummary,
+  useGetDashboardMetricsQuery,
+} from "@/state/api";
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+
+type ExpenseSums = {
+  [category: string]: number;
+};
 
 const colors = ["#00C49F", "#0088FE", "#FFBB28"];
 
 const CardExpenseSummary = () => {
   const { data: dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
+
+  const expenseByCategorySummary =
+    dashboardMetrics?.expenseByCategorySummary || [];
+
+  const expenseSums = expenseByCategorySummary.reduce(
+    (acc: ExpenseSums, item: ExpenseByCategorySummary) => {
+      const category = item.category + " Expenses";
+      const amount = parseInt(item.amount, 10);
+      if (!acc[category]) acc[category] = 0;
+      acc[category] += amount;
+      return acc;
+    },
+    {}
+  );
+
+  const expenseCategories = Object.entries(expenseSums).map(
+    ([name, value]) => ({
+        name,
+        value,
+    })
+  )
 
   return (
     <div className="row-span-3 bg-white shadow-md rounded-2xl flex flex-col justify-between">
@@ -34,7 +62,11 @@ const CardExpenseSummary = () => {
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                  ></Pie>
+                  >
+                    {expenseCategories.map((entry, index) => (
+                      <Cell></Cell>
+                    ))}
+                  </Pie>
                 </PieChart>
               </ResponsiveContainer>
             </div>
