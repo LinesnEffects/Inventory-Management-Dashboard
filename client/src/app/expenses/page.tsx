@@ -6,7 +6,7 @@ import {
 } from "@/state/api";
 import { useMemo, useState } from "react";
 import Header from "@/app/(components)/Header";
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 type AggregatedData = {
   [category: string]: AggregatedDataItem;
@@ -57,9 +57,11 @@ const Expenses = () => {
           ).toString(16)}`;
           acc[data.category].amount += amount;
         }
-        return acc
+        return acc;
       }, {});
-  });
+
+    return Object.values(filtered);
+  }, [expenses, selectedCategory, startDate, endDate]);
 
   const classNames = {
     label: "block text-sm font-medium text-gray-700",
@@ -144,7 +146,7 @@ const Expenses = () => {
         </div>
         {/* Pie Chart */}
         <div className="flex-grow bg-white shadow rounded-lg p-4 md:p-6">
-          <ResponsiveContainer width="100" height={400}>
+          <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
                 data={aggregatedData}
@@ -155,7 +157,20 @@ const Expenses = () => {
                 fill="#8884d8"
                 dataKey="amount"
                 onMouseEnter={(_, index) => setActiveIndex(index)}
-              ></Pie>
+              >
+                {aggregatedData.map(
+                  (entry: AggregatedDataItem, index: number) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={
+                        index === activeIndex ? "rgb(29, 78, 216)" : entry.color
+                      }
+                    />
+                  )
+                )}
+              </Pie>
+              <Tooltip/>
+              <Legend/>
             </PieChart>
           </ResponsiveContainer>
         </div>
